@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from src.masks import get_mask_account, get_mask_card_number  # Импорт ваших функций
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(account_info: str) -> str:
@@ -15,10 +15,10 @@ def mask_account_card(account_info: str) -> str:
     """
     parts = account_info.split()
     if len(parts) < 2:
-        return account_info  # Если нет номера
+        return account_info
 
-    account_type = " ".join(parts[:-1])  # Тип карты/счета
-    number = parts[-1]  # Номер
+    account_type = " ".join(parts[:-1])
+    number = parts[-1]
 
     if "счет" in account_type.lower():
         return f"{account_type} {get_mask_account(number)}"
