@@ -1,5 +1,4 @@
-from datetime import datetime
-from typing import Dict, List, Literal
+from typing import Dict, List
 
 
 def filter_by_state(
@@ -20,4 +19,3 @@ def sort_by_date(
         key=lambda x: x['date'],
         reverse=reverse
     )
-
