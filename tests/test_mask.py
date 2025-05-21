@@ -20,3 +20,4 @@ def test_mask_account_card(input_str: str, expected: str) -> None:
 ])
 def test_get_date(input_str: str, expected: str) -> None:
     assert get_date(input_str) == expected
+

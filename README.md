@@ -113,6 +113,11 @@ print("Sorted operations:", sorted_operations)
 
 pytest
 
+Для проверки покрытия:
+pytest –cov=src –cov-report=html
+
+Результаты покрытие можно посмотреть в папке htmlcov/index.html.
+
 Лицензия
 
 Этот проект лицензирован под лицензией MIT. Для подробностей смотрите файл LICENSE.
