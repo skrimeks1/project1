@@ -118,6 +118,16 @@ pytest –cov=src –cov-report=html
 
 Результаты покрытие можно посмотреть в папке htmlcov/index.html.
 
+## Модуль generators
+
+### Функции:
+1. `filter_by_currency`  
+   Фильтрует транзакции по валюте.  
+   Пример:  
+   ```python
+   for tx in filter_by_currency(transactions, "USD"):
+       print(tx["id"])
+
 Лицензия
 
 Этот проект лицензирован под лицензией MIT. Для подробностей смотрите файл LICENSE.
