@@ -3,26 +3,25 @@ from datetime import datetime
 from src.masks import get_mask_account, get_mask_card_number
 
 
-def mask_account_card(account_info: str) -> str:
-    """
-    Маскирует номер карты или счета в строке формата "Visa Platinum 7000792289606361" или "Счет 73654108430135874305".
+def mask_account_card(data: str) -> str:
+    """Определяет, что маскировать: номер карты или счёта, и применяет нужную маску."""
+    if not data:
+        return data  # если строка пуста — возвращаем её как есть
 
-    Args:
-        account_info (str): Строка с типом и номером карты/счета.
+    parts = data.rsplit(" ", 1)
 
-    Returns:
-        str: Строка с замаскированным номером.
-    """
-    parts = account_info.split()
-    if len(parts) < 2:
-        return account_info
+    if len(parts) != 2:
+        return data  # если формат неожиданный — вернём как есть
 
-    account_type = " ".join(parts[:-1])
-    number = parts[-1]
+    label, number = parts
 
-    if "счет" in account_type.lower():
-        return f"{account_type} {get_mask_account(number)}"
-    return f"{account_type} {get_mask_card_number(number)}"
+    # Маскируем номер карты (строго 16 цифр)
+    if number.isdigit() and len(number) == 16:
+        masked = get_mask_card_number(number)
+    else:
+        masked = get_mask_account(number) if number else ""
+
+    return f"{label} {masked}"
 
 
 def get_date(date_str: str) -> str:
@@ -43,7 +42,7 @@ def get_date(date_str: str) -> str:
 
 
 if __name__ == "__main__":
-    # Тест маскировки карты и счета
+    # Тест маскировки карты и счёта
     print(mask_account_card("Visa Platinum 7000792289606361"))  # Visa Platinum 7000 79** **** 6361
     print(mask_account_card("Счет 73654108430135874305"))      # Счет **4305
     print(get_date("2024-03-11T02:26:18.671407"))  # 11.03.2024
